@@ -10,6 +10,10 @@ https://www.docker.com/blog/simplify-your-deployments-using-the-rust-official-im
 
 Głównie chodzi tu o zastosowanie cargo chef aby móc trzymać cache z budowanych dependencies (cargo nie lubi sie z dockerem).
 
+Klucz API wstrzykuje za pomocą fly.io -
+```
+flyctl secrets set IPGEOLOCATION_API_KEY=<tu_wstaw_klucz>
+```
 Było sporo problemów z łączeniem się z API - reqwest wykrzaczał się na certyfikacie (dodałem krok w dockerfile),
 a potem psuł się DNS. Zmieniłem też obraz na trochę "grubszy", bo brakowało sporo potrzebnych rzeczy (oczywiście errory były kompletnie nieczytelne i nie wskazywały na ten problem, ani nie mówiły czego brakuje. Dziękuje stackoverflow!).
 Fix znalazłem na chińskim blogu (mam nadzieje, że to ujmie Pana za serce i duszę).
