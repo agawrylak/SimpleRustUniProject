@@ -8,7 +8,7 @@ on:
       - completed
 
 jobs:
-  deploy:
+  terraform:
     runs-on: ubuntu-latest
     steps:
       - name: Configure AWS credentials
@@ -18,12 +18,19 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-central-1
 
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Change directory to Terraform package
+        run: cd terraform
+
       - name: Initialize Terraform
         run: terraform init
 
-      - name: Apply Terraform Changes
-        run: terraform apply --auto-approve
-
+  deploy:
+    needs: terraform
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout source code
         uses: actions/checkout@v2
 
