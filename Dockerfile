@@ -1,8 +1,10 @@
 # Stage: chef (base image: lukemathwalker/cargo-chef:latest-rust-slim-buster)
 # This stage sets up the base image for building Rust applications and sets the working directory.
-FROM lukemathwalker/cargo-chef:latest-rust-slim-buster AS chef
-WORKDIR /app
-
+FROM rust:1.69-slim-buster AS chef
+# We only pay the installation cost once,
+# it will be cached from the second build onwards
+RUN cargo install cargo-chef
+WORKDIR app
 # Install pkg-config and libssl-dev (needed for reqwest :<)
 RUN apt-get update && apt-get install -y pkg-config libssl-dev
 
