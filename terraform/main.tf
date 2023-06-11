@@ -26,7 +26,7 @@ resource "aws_elastic_beanstalk_environment" "ag-zad2-env" {
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "IamInstanceProfile"
-    value     =  "terraform-aws"
+    value     = "terraform-aws"
   }
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
@@ -38,7 +38,6 @@ resource "aws_elastic_beanstalk_environment" "ag-zad2-env" {
     name      = "StreamLogs"
     value     = "true"
   }
-
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "IPGEOLOCATION_API_KEY"
