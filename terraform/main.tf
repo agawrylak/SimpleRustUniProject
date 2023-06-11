@@ -14,6 +14,10 @@ data "aws_secretsmanager_secret_version" "ipgeo_api_key" {
   secret_id = "IPGEOLOCATION_API_KEY"
 }
 
+locals {
+  ipgeolocation_api_key = jsondecode(data.aws_secretsmanager_secret_version.ipgeo_api_key.secret_string)["IPGEOLOCATION_API_KEY"]
+}
+
 resource "aws_elastic_beanstalk_environment" "ag-zad2-env" {
   name                = "ag-zad2-env"
   application         = aws_elastic_beanstalk_application.ag-zad2.name
@@ -38,7 +42,7 @@ resource "aws_elastic_beanstalk_environment" "ag-zad2-env" {
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "IPGEOLOCATION_API_KEY"
-    value     = data.aws_secretsmanager_secret_version.ipgeo_api_key.secret_string
+    value     = local.ipgeolocation_api_key
   }
 }
 

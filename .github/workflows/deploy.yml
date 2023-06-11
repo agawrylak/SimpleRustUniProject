@@ -27,6 +27,9 @@ jobs:
       - name: Initialize Terraform
         run: terraform init
 
+      - name: Apply Terraform
+        run: terraform apply -auto-approve
+
   deploy:
     needs: terraform
     runs-on: ubuntu-latest
