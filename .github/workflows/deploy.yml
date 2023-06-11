@@ -34,16 +34,11 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
 
-      - name: Generate deployment package
-        run: zip -r deploy.zip . -x '*.git*'
-
-      - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v21
+      - name: Redeploy beanstalk
+        uses: ItsKarma/aws-cli@v1.70.0
         with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: ag_zad_2
-          environment_name: ag-zad2-env
-          version_label: 12345
-          region: eu-central-1
-          deployment_package: deploy.zip
+          args: elasticbeanstalk update-environment --application-name ag-zad2 --environment-name ag-zad2-env --version-label ag-zad2-version
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "eu-central-1"
