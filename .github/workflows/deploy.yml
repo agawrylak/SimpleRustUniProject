@@ -21,14 +21,11 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
 
-      - name: Change directory to Terraform package
-        run: cd terraform
-
-      - name: Initialize Terraform
-        run: terraform init
-
-      - name: Apply Terraform
-        run: terraform apply -auto-approve
+      - name: Change directory to Terraform package and apply Terraform
+        run: |
+          cd terraform
+          terraform init
+          terraform apply -auto-approve
 
   deploy:
     needs: terraform

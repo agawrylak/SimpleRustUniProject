@@ -42,10 +42,8 @@ przypadku sukcesu builda.
 
 1. **Configure AWS credentials:** Ustawiam AWSowe credsy z sekretów github.
 2. **Checkout Repository:** Pobiera kod źródłowy repozytorium przy użyciu akcji `actions/checkout@v2`.
-3. **Change directory to Terraform package:** Wchodzę w folder zawierający pliki Terraform, żeby nie zaśmiecały głównego
-   katalogu.
-4. **Initialize Terraform:** Inicjalizuje projekt terraformowy.
-5. **Apply Terraform:** Wykonuje potrzebne zmiany w infrastrukturze. `-auto-approve` jest potrzebne, bo normalnie
+3. **Change directory to Terraform package and apply Terraform:** Wchodzę w folder zawierający pliki Terraform, żeby nie zaśmiecały głównego
+   katalogu. Inicjalizuje projekt terraformowy. Wykonuje potrzebne zmiany w infrastrukturze. `-auto-approve` jest potrzebne, bo normalnie
    komenda prosi o wpisanie "yes", czego oczywiście nie mogę zrobić w normalny sposób.
 
 ##### Deploy
