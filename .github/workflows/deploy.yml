@@ -42,7 +42,7 @@ jobs:
 
       - name: Deploy to Elastic Beanstalk
         run: |
-          aws elasticbeanstalk create-application-version --application-name your-application-name --version-label ${{ github.sha }} --source-bundle '{
+          aws elasticbeanstalk create-application-version --application-name ag-zad2 --version-label ${{ github.sha }} --source-bundle '{
             "S3Bucket": "ag-zad2-s3",
             "S3Key": "Dockerrun.aws.json"
           }'
