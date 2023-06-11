@@ -32,11 +32,10 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
 
-      - name: Redeploy beanstalk
-        uses: ItsKarma/aws-cli@v1.70.0
-        with:
-          args: elasticbeanstalk update-environment --application-name ag-zad2 --environment-name ag-zad2-env --version-label ag-zad2-version
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: "eu-central-1"
+      - name: Deploy to Elastic Beanstalk
+        run: |
+            aws elasticbeanstalk create-application-version --application-name your-application-name --version-label ${{ github.sha }} --source-bundle '{
+              "S3Bucket": "your-bucket-name",
+              "S3Key": "Dockerrun.aws.json"
+            }'
+            aws elasticbeanstalk update-environment --application-name your-application-name --environment-name your-environment-name --version-label ${{ github.sha }}
