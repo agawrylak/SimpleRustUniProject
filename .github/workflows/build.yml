@@ -39,6 +39,6 @@ jobs:
           file: Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: pollubartur/ag_sprawozdanie_fullstack:zad2
+          tags: pollubartur/ag_sprawozdanie_fullstack:latest
           cache-from: type=registry,ref=pollubartur/ag_sprawozdanie_fullstack:cache
           cache-to: type=registry,ref=pollubartur/ag_sprawozdanie_fullstack:cache,mode=max
