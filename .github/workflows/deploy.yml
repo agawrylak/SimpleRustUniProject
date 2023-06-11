@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Change directory to Terraform package and apply Terraform
-      - uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v2
         run: |
           cd terraform
           terraform init
