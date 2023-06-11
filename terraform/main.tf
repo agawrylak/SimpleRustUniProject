@@ -20,5 +20,15 @@ resource "aws_elastic_beanstalk_environment" "ag-zad2-env" {
     name      = "IamInstanceProfile"
     value     =  "terraform-aws"
   }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "LOG_STREAMING_ENABLED"
+    value     = "true"
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "StreamLogs"
+    value     = "true"
+  }
 }
 
