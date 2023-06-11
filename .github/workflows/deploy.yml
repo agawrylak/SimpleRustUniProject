@@ -1,11 +1,9 @@
 name: Deploy to Elastic Beanstalk
 
 on:
-  workflow_run:
-    workflows:
-      - Build Docker Images
-    types:
-      - completed
+  push:
+    branches:
+      - master
 
 jobs:
   terraform:
