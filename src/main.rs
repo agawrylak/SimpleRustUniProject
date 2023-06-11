@@ -60,8 +60,8 @@ async fn index(request: HttpRequest) -> HttpResponse {
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    env::set_var("RUST_LOG", "debug"); // Ustawienie poziomu logowania na "info"
-    env_logger::init(); // Inicjalizacja loggera env_logger
+    env::set_var("RUST_LOG", "info");
+    env_logger::init();
     let author = "Artur Gawrylak";
     let port = "8000";
     let address = format!("0.0.0.0:{}", port);

@@ -1,7 +1,11 @@
+name: Deploy app to AWS
+
 on:
-  push:
-    branches:
-      - master
+  workflow_run:
+    workflows:
+      - "Build Docker Images"
+    types:
+      - completed
 
 jobs:
   terraform:
@@ -53,4 +57,4 @@ jobs:
           aws elasticbeanstalk update-environment \
           --application-name ag_zad_2 \
           --environment-name ag-zad2-env \
-          --version-label "ver-${{ github.sha }}" \
+          --version-label "ver-${{ github.sha }}"
