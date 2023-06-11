@@ -22,7 +22,6 @@ async fn index(request: HttpRequest) -> HttpResponse {
     log::debug!("Current Time: {}", now.format("%Y-%m-%d %H:%M:%S"));
     log::debug!("Client IP: {}", client_ip);
     log::debug!("Geolocation URL: {}", geolocation_url);
-    log::debug!("Geolocation key: {}", ipgeolocation_api_key);
 
     let response_text: Option<String> = match reqwest::get(&geolocation_url).await {
         Ok(response) => match response.text().await {
