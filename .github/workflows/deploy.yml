@@ -47,6 +47,10 @@ jobs:
           --source-bundle S3Bucket="ag-zad2-s3",S3Key="Dockerrun.aws.json" \
           --version-label "ver-${{ github.sha }}" \
           --description "commit-sha-${{ github.sha }}"
-      - name: Update env
-        run:
-          aws elasticbeanstalk update-environment --application-name ag_zad_2 --environment-name ag_zad2_env --version-label ${{ github.sha }}
+
+      - name: Update environment
+        run: |
+          aws elasticbeanstalk update-environment \
+          --application-name ag_zad_2 \
+          --environment-name ag-zad2-env \
+          --version-label ${{ github.sha }}
