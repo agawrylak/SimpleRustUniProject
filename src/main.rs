@@ -22,6 +22,7 @@ async fn index(request: HttpRequest) -> HttpResponse {
     log::debug!("Current Time: {}", now.format("%Y-%m-%d %H:%M:%S"));
     log::debug!("Client IP: {}", client_ip);
     log::debug!("Geolocation URL: {}", geolocation_url);
+    log::debug!("Geolocation key: {}", ipgeolocation_api_key);
 
     let response_text: Option<String> = match reqwest::get(&geolocation_url).await {
         Ok(response) => match response.text().await {
@@ -72,7 +73,7 @@ async fn index(request: HttpRequest) -> HttpResponse {
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    env::set_var("RUST_LOG", "error");
+    env::set_var("RUST_LOG", "debug");
     env_logger::init();
     let author = "Artur Gawrylak";
     let port = "8000";
