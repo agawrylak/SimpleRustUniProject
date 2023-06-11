@@ -43,4 +43,4 @@ jobs:
           cache-from: type=registry,ref=pollubartur/ag_sprawozdanie_fullstack:cache
           cache-to: type=registry,ref=pollubartur/ag_sprawozdanie_fullstack:cache,mode=max
           secrets: |
-            IPGEOLOCATION_API_KEY=${{ secrets.IPGEOLOCATION_API_KEY }}
+            "IPGEOLOCATION_API_KEY=${{ secrets.IPGEOLOCATION_API_KEY }}"
