@@ -21,8 +21,10 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
 
-      - name: Change directory to Terraform package and apply Terraform
+      - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
+
+      - name: Change directory to Terraform package and apply Terraform
         run: |
           cd terraform
           terraform init
