@@ -35,10 +35,6 @@ RUN update-ca-certificates
 
 COPY --from=runtime /app/target/release/artur_gawrylak_sprawozdanie_1 /usr/local/bin/artur_gawrylak_sprawozdanie_1
 
-# Add the following lines to copy the secret and set it as an environment variable
-COPY --from=runtime /run/secrets/IPGEOLOCATION_API_KEY /run/secrets/IPGEOLOCATION_API_KEY
-ENV IPGEOLOCATION_API_KEY=/run/secrets/IPGEOLOCATION_API_KEY
-
 # Environment variables are set for the application.
 ENV AUTHOR="Artur Gawrylak"
 ENV PORT="8000"
