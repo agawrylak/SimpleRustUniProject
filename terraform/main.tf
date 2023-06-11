@@ -2,6 +2,10 @@ provider "aws" {
   region = "eu-central-1"
 }
 
+resource "aws_s3_bucket" "ag_zad2_s3" {
+  bucket = "ag-zad2-s3"
+}
+
 resource "aws_elastic_beanstalk_application" "ag-zad2" {
   name = "ag_zad_2"
 }
