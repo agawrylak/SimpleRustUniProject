@@ -17,19 +17,30 @@ async fn index(request: HttpRequest) -> HttpResponse {
         .unwrap_or_else(|| String::from("Unknown IP"));
     let geolocation_url = format!("https://api.ipgeolocation.io/ipgeo?apiKey={}&ip={}", ipgeolocation_api_key, client_ip);
 
+    log::info!("Author: {}", author);
+    log::info!("Port: {}", port);
+    log::info!("IP Geolocation API Key: {}", ipgeolocation_api_key);
+    log::info!("Current Time: {}", now.format("%Y-%m-%d %H:%M:%S"));
+    log::info!("Client IP: {}", client_ip);
+    log::info!("Geolocation URL: {}", geolocation_url);
+
     let response_text: Option<String> = match reqwest::get(&geolocation_url).await {
         Ok(response) => match response.text().await {
-            Ok(text) => Some(text),
+            Ok(text) => {
+                log::info!("Response text: {}", text);
+                Some(text)
+            }
             Err(err) => {
-                println!("Error retrieving response text: {}", err);
+                log::error!("Error retrieving response text: {}", err);
                 None
             }
         },
         Err(err) => {
-            println!("Error performing request: {}", err);
+            log::error!("Error retrieving response text: {}", err);
             None
         }
     };
+
     let current_time: Option<String> = match response_text {
         Some(response_text) => {
             let json: serde_json::Value = serde_json::from_str(&response_text).unwrap_or(serde_json::Value::Null);
@@ -45,6 +56,8 @@ async fn index(request: HttpRequest) -> HttpResponse {
         }
         None => None,
     };
+
+    log::info!("Current Time from Response: {:?}", current_time);
 
     let response_body = format!(
         "Request received at: {}\nAuthor: {}\nPort: {}\nClient IP: {}\nCurrent Time: {}",
