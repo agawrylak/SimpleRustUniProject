@@ -17,17 +17,16 @@ async fn index(request: HttpRequest) -> HttpResponse {
         .unwrap_or_else(|| String::from("Unknown IP"));
     let geolocation_url = format!("https://api.ipgeolocation.io/ipgeo?apiKey={}&ip={}", ipgeolocation_api_key, client_ip);
 
-    log::info!("Author: {}", author);
-    log::info!("Port: {}", port);
-    log::info!("IP Geolocation API Key: {}", ipgeolocation_api_key);
-    log::info!("Current Time: {}", now.format("%Y-%m-%d %H:%M:%S"));
-    log::info!("Client IP: {}", client_ip);
-    log::info!("Geolocation URL: {}", geolocation_url);
+    log::debug!("Author: {}", author);
+    log::debug!("Port: {}", port);
+    log::debug!("Current Time: {}", now.format("%Y-%m-%d %H:%M:%S"));
+    log::debug!("Client IP: {}", client_ip);
+    log::debug!("Geolocation URL: {}", geolocation_url);
 
     let response_text: Option<String> = match reqwest::get(&geolocation_url).await {
         Ok(response) => match response.text().await {
             Ok(text) => {
-                log::info!("Response text: {}", text);
+                log::debug!("Response text: {}", text);
                 Some(text)
             }
             Err(err) => {
@@ -57,7 +56,7 @@ async fn index(request: HttpRequest) -> HttpResponse {
         None => None,
     };
 
-    log::info!("Current Time from Response: {:?}", current_time);
+    log::debug!("Current Time from Response: {:?}", current_time);
 
     let response_body = format!(
         "Request received at: {}\nAuthor: {}\nPort: {}\nClient IP: {}\nCurrent Time: {}",
@@ -73,16 +72,16 @@ async fn index(request: HttpRequest) -> HttpResponse {
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    env::set_var("RUST_LOG", "info");
+    env::set_var("RUST_LOG", "error");
     env_logger::init();
     let author = "Artur Gawrylak";
     let port = "8000";
     let address = format!("0.0.0.0:{}", port);
     let now: DateTime<Local> = Local::now();
 
-    log::info!("Author: {}", author);
-    log::info!("Port: {}", port);
-    log::info!("Start time: {}", now.format("%Y-%m-%d %H:%M:%S"));
+    log::debug!("Author: {}", author);
+    log::debug!("Port: {}", port);
+    log::debug!("Start time: {}", now.format("%Y-%m-%d %H:%M:%S"));
     HttpServer::new(|| App::new().service(index))
         .bind(address)?
         .run()
