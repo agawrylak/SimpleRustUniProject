@@ -53,4 +53,4 @@ jobs:
           aws elasticbeanstalk update-environment \
           --application-name ag_zad_2 \
           --environment-name ag-zad2-env \
-          --version-label ${{ github.sha }}
+          --version-label "ver-${{ github.sha }}" \
