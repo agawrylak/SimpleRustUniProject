@@ -89,6 +89,10 @@ Użyłem w deployu state pull - to był zły pomysł, bo wyświetliło to mój s
 key i podmieniłem sekret, aby jakiś bot nie zapostował mojego klucza na Twitterze.
 
 ## Build bez cache vs z cache
+Bez cache:
+![chrome_UX1kFiI8Mj](https://github.com/agawrylak/SimpleRustUniProject/assets/64438253/2d809fdb-10f5-479e-886e-aade72b92c29)
+Z cache:
+![chrome_fxhYzx7W5l](https://github.com/agawrylak/SimpleRustUniProject/assets/64438253/ba605091-42d1-47a7-845b-62319ef8af10)
 
 #### BONUS (mój ulubiony żart informatyczny)
 
