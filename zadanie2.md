@@ -1,7 +1,7 @@
 # Zadanie 2
 
 Link do
-aplikacji: [klik](http://ag-zad2-env.eba-mptsmukz.eu-central-1.elasticbeanstalk.com/)
+aplikacji: [klik](http://ag-zad2-env.eba-p3qbj6xi.eu-central-1.elasticbeanstalk.com/)
 
 ## Deploy na AWS
 
