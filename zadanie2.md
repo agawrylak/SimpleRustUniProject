@@ -69,8 +69,10 @@ przypadku sukcesu builda.
   API.
 - Rozwiązanie jest w pełni automatyczne i w bardzo łatwy sposób mogę teraz zrobić deploy na dowolną liczbę środowisk.
 - Dodatkowy plus Terraforma to komenda terraform destroy - mogę posprzątać po sprawozdaniu jedną komendą (no niestety w
-  teorii, bo trzeba z s3 wyrzucić pliki, ale pewnie na to też jest komenda)
-- Docelowo state Terraforma powiniennem trzymać w s3.
+  teorii, bo trzeba z s3 wyrzucić pliki, ale pewnie na to też jest komenda. No dobra, to dwoma).
+- State Terraforma trzymam w S3 - inaczej byłbym ograniczony do używania Terraforma tylko lokalnie.
+- Docelowo powiniennem apply robić tylko na masterze, a na branchach tylko plan, żeby nie popsuć aplikacji. W tym
+  przypadku nie będę korzystał z innych branchy, więc nie dodałem takiej opcji.
 
 ## Napotkane problemy
 
@@ -80,8 +82,9 @@ stackoverflow, że trzeba zrobić ją samemu oraz znaleźć wszystkie potrzebne 
 
 Coś też ze stanem Terraforma poszło nie tak - wg. lokalnego Terraforma wszystko jest ok, w github actions próbuje
 tworzyć beanstalka i env. Komendą terraform destroy wywaliłem wszystkie AWSowe komponenty i wszystko wróciło do normy.
-Prawdopodobnie powiniennem trzymać state terraforma w s3, ale i tak lokalnie wtedy by sie popsuło - muszę kiedyś się
-temu przyjrzeć.
+Oczywiście następny deploy znowu wszystko popsuł - state jest trzymany lokalnie. Dodałem więc backend trzymany w S3
+
+## Build bez cache vs z cache
 
 #### BONUS (mój ulubiony żart informatyczny)
 

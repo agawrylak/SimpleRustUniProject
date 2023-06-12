@@ -1,3 +1,12 @@
+terraform {
+  backend "s3" {
+    bucket         = "ag-zad2-s3-tf"
+    key            = "ag-zad2-tfstate"
+    region         = "eu-central-1"
+    encrypt        = true
+  }
+}
+
 provider "aws" {
   region = "eu-central-1"
 }
