@@ -28,7 +28,6 @@ jobs:
         run: |
           cd terraform
           terraform init
-          terraform state pull
           terraform apply -auto-approve
 
   deploy:
