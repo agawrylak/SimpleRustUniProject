@@ -1,7 +1,7 @@
 # Zadanie 2
 
 Link do
-aplikacji: [http://ag-zad2-env.eba-ermbpnpf.eu-central-1.elasticbeanstalk.com/](http://ag-zad2-env.eba-ermbpnpf.eu-central-1.elasticbeanstalk.com/)
+aplikacji: [klik](http://ag-zad2-env.eba-pypai8zj.eu-central-1.elasticbeanstalk.com//)
 
 ## Deploy na AWS
 
@@ -42,8 +42,10 @@ przypadku sukcesu builda.
 
 1. **Configure AWS credentials:** Ustawiam AWSowe credsy z sekretów github.
 2. **Checkout Repository:** Pobiera kod źródłowy repozytorium przy użyciu akcji `actions/checkout@v2`.
-3. **Change directory to Terraform package and apply Terraform:** Wchodzę w folder zawierający pliki Terraform, żeby nie zaśmiecały głównego
-   katalogu. Inicjalizuje projekt terraformowy. Wykonuje potrzebne zmiany w infrastrukturze. `-auto-approve` jest potrzebne, bo normalnie
+3. **Change directory to Terraform package and apply Terraform:** Wchodzę w folder zawierający pliki Terraform, żeby nie
+   zaśmiecały głównego
+   katalogu. Inicjalizuje projekt terraformowy. Wykonuje potrzebne zmiany w infrastrukturze. `-auto-approve` jest
+   potrzebne, bo normalnie
    komenda prosi o wpisanie "yes", czego oczywiście nie mogę zrobić w normalny sposób.
 
 ##### Deploy
@@ -59,19 +61,27 @@ przypadku sukcesu builda.
 
 - S3 jest potrzebne, aby wrzucić plik `Dockerrun.aws.json`. Na podstawie tego pliku można zrobić deploy z gotowego
   obrazu. Wszystkie gotowe akcje obsługują tylko ponowne budowanie, więc musiałem posłużyć się tragicznej jakości
-  dokumentacją AWS oraz chińskimi blogami. Walka była długa i zacięta, co można zauważyć po historii commitów.
+  dokumentacją AWS oraz chińskimi blogami. Walka była długa i zacięta, co można zauważyć po histori commitów.
 - Sekret do API pobieram z Secret Managera i wrzucam do zmiennych środowiskowych. Próbowałem skorzystać z sekretów
   Docker, ale nie chciały ze mną współpracować, a w internecie widziałem też sporo głosów, że nie są najlepszym
   rozwiązaniem.
 - Ustawienia w Beanstalku służą do ustawienia zmiennych środowiskowych - odpalam sobie logowanie oraz przekazuję klucz
   API.
 - Rozwiązanie jest w pełni automatyczne i w bardzo łatwy sposób mogę teraz zrobić deploy na dowolną liczbę środowisk.
+- Dodatkowy plus Terraforma to komenda terraform destroy - mogę posprzątać po sprawozdaniu jedną komendą (no niestety w
+  teorii, bo trzeba z s3 wyrzucić pliki, ale pewnie na to też jest komenda)
+- Docelowo state Terraforma powiniennem trzymać w s3.
 
 ## Napotkane problemy
 
 Generalnie największym problemem okazało się to, że domyślnie przy tworzeniu "z palca" Beanstalka tworzy się też
 odpowiednia rola. Niestety w przypadku Terraform nie występuje żaden czytelny error, trzeba się domyślić przy pomocy
 stackoverflow, że trzeba zrobić ją samemu oraz znaleźć wszystkie potrzebne permissiony.
+
+Coś też ze stanem Terraforma poszło nie tak - wg. lokalnego Terraforma wszystko jest ok, w github actions próbuje
+tworzyć beanstalka i env. Komendą terraform destroy wywaliłem wszystkie AWSowe komponenty i wszystko wróciło do normy.
+Prawdopodobnie powiniennem trzymać state terraforma w s3, ale i tak lokalnie wtedy by sie popsuło - muszę kiedyś się
+temu przyjrzeć.
 
 #### BONUS (mój ulubiony żart informatyczny)
 
