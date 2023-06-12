@@ -82,7 +82,8 @@ stackoverflow, że trzeba zrobić ją samemu oraz znaleźć wszystkie potrzebne 
 
 Coś też ze stanem Terraforma poszło nie tak - wg. lokalnego Terraforma wszystko jest ok, w github actions próbuje
 tworzyć beanstalka i env. Komendą terraform destroy wywaliłem wszystkie AWSowe komponenty i wszystko wróciło do normy.
-Oczywiście następny deploy znowu wszystko popsuł - state jest trzymany lokalnie. Dodałem więc backend trzymany w S3
+Oczywiście następny deploy znowu wszystko popsuł - state jest trzymany lokalnie. Dodałem więc backend trzymany w S3 i
+teraz mam ten sam state niezależnie od maszyny.
 
 Użyłem w deployu state pull - to był zły pomysł, bo wyświetliło to mój sekret w pipeline. Oczywiście przegenerowałem api
 key i podmieniłem sekret, aby jakiś bot nie zapostował mojego klucza na Twitterze.
